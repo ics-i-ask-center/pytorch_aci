@@ -1,6 +1,8 @@
 BootStrap: shub
 From: shub://willgpaik/centos7_aci:latest
 
+%runscript
+    exec python3 "$@"
 
 %post
 yum -y install python36-devel \
@@ -24,4 +26,5 @@ pip install torchvision \
         bokeh \
         plotly \
         pillow \
-        opencv-python
+        opencv-python \
+	torchbiggraph
