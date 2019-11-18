@@ -22,3 +22,6 @@ bokeh \
 plotly \
 pillow \
 opencv-python
+
+2019/10/16  
+Pytorch is upgraded to 1.3.0
