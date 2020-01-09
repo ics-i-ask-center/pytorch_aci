@@ -1,0 +1,44 @@
+BootStrap: docker
+From: nvidia/cuda:10.2-cudnn7-devel-centos7
+
+%environment 
+export PATH=/opt/conda/bin/:$PATH
+export LC_ALL=C
+
+%runscript
+exec /opt/conda/bin/python3 "$@"
+
+%post
+    
+    #Base CentOS7 packages
+    yum -y groups install "Development Tools"
+    yum -y groups install "GNOME Desktop"
+    yum -y groups install "Base"
+    yum -y groups install "X Window System" "Desktop" "Fonts"
+    yum -y install qt
+    yum -y install mesa-libGLU
+    yum -y install SDL SDL-devel
+    yum install -y epel-release
+    yum -y update
+    yum -y install qtwebkit
+    yum -y install qt5-qtbase-devel
+    yum -y install VirtualGL  
+    yum -y install clinfo 
+    yum -y install numactl
+   
+    #Install Anaconda distribution
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ./miniconda.sh
+    bash ./miniconda.sh -b -p /opt/conda
+    export PATH=/opt/conda/bin:${PATH}
+    conda update -y conda
+    conda update --all -y
+
+    #Install Pytorch
+    conda install -y pytorch torchvision cudatoolkit=10.1 -c pytorch
+
+    #Install additional conda packages
+    conda install -y scipy pandas scikit-learn jupyter jupyterlab spyder ipython matplotlib seaborn scikit-image bokeh plotly pillow
+
+    #Install additional python packages with pip
+    pip install torchsummary opencv-python
+
