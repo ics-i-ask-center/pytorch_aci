@@ -29,4 +29,5 @@ Pytorch is upgraded to 1.3.0
 2020/01/09
 Centos 7 Container Recipe Added for GPU enabled Pytorch 1.3.1 via Anaconda (torchvision=0.42)
 
-A build of this image is available at:
+A build of this image is available via:
+singularity pull shub://jpetucci/pytorch_aci
